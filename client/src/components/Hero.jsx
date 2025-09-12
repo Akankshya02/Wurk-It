@@ -26,18 +26,23 @@ const Hero = () => {
         <p className='mb-8 max-w-xl mx-auto text-sm font-light px-5'>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos adipisci obcaecati quidem exercitationem beatae sed inventore ipsa voluptates tenetur repellendus voluptate, reiciendis incidunt? Modi atque aliquid voluptatum consectetur cumque, non saepe exercitationem vel blanditiis provident!
         </p>
-        <div className='flex items-center justify-between bg-white rounded text-gray-600 max-w-xl pl-4 mx-4 sm:mx-auto'>
-            <div className='flex items-center'>
+        {/* <div className='flex items-center justify-between bg-white rounded text-gray-600 max-w-xl pl-4 mx-4 sm:mx-auto'> */}
+        <div className='flex flex-col sm:flex-row items-stretch bg-white rounded text-gray-600 max-w-xl  mx-4 sm:mx-auto overflow-hidden'>
+
+            <div className='flex items-center pl-4'>
                 <img className='h-4' src={assets.search_icon}/>
                 <input ref={titleRef} type="text" placeholder='Search For Jobs' className='max-sm:text-xs p-2 rounded outline-none width: full'/>
             </div>
-            <div className='flex items-center'>
+            <div className='flex items-center pl-4'>
                 <img className='h-4' src={assets.location_icon}/>
                 <input ref={locationRef} type="text" placeholder='Location' className='max-sm:text-xs p-2 rounded outline-none width: full'/>
             </div>
+            <button onClick={onSearch} 
             
-            <button onClick={onSearch} className='bg-indigo-950 px-6 py-2 rounded text-white m-1'>Search</button>
-            
+            // className='bg-indigo-950 px-6 py-2 rounded text-white m-1'
+
+            className='bg-indigo-950 px-12 py-2 sm:rounded-r rounded-b text-white w-full sm:w-auto'
+            >Search</button>
         </div>
       </div>
       <div className='border border-gray-300 shadow-md mx-2 mt-5 p-6 rounded-md flex'>
