@@ -13,15 +13,35 @@ const RecruiterLogin = () => {
 
     const [image, setImage] = useState(false)
 
-    const [isNextDataSubmitted, setIsNextdataSubmitted] = useState(false)
+    const [isTextDataSubmitted, setIsTextdataSubmitted] = useState(false)
+
+    const onSubmitHandler = async (e) => {
+      e.preventDefault()
+
+      if (state === "Sign Up" && !isTextDataSubmitted){
+        setIsTextdataSubmitted(true)
+      }
+    }
 
   return (
     <div className='absolute top-0 left-0 right-0 bottom-0 z-10 backdrop-blur-sm bg-black/30 flex flex-col justify-center items-center'>
-      <form className='relative bg-white p-10 rounded-xl text-slate-500'>
+      <form onSubmit={onSubmitHandler} className='relative bg-white p-10 rounded-xl text-slate-500'>
 
       <h1 className='text-center text-2xl text-neutral-700 font-medium'>Recruiter {state}</h1>
       <p className='text-sm'>Welcome back! Please SignIn to continue</p>
 
+      { state === "Sign Up" && isTextDataSubmitted ? 
+      <>
+        <div className='flex items-center gap-4 my-10'>
+          <label htmlFor="image">
+            <img className='w-16 rounded-full' src={assets.upload_area} alt="" />
+            <input type="file" hidden id='image' />
+          </label>
+          <p>Upload Company <br /> logo</p>
+          
+        </div>
+      </> 
+    :
       <>
 
         {state !== 'Login' && (
@@ -42,14 +62,18 @@ const RecruiterLogin = () => {
         <input className='outline-none text-sm' onChange={e=> setPassword(e.target.value)} value={password} type="password" placeholder='Password' required/>
     </div>
 
-        <p className='text-sm text-indigo-800 my-4 cursor-pointer'>Forgot Password ? </p>
+        
       </>
+    }
+      
+      <p className='text-sm text-indigo-800 my-4 cursor-pointer'>Forgot Password ? </p>
 
-        <button className='bg-indigo-950 w-full text-white py-2 rounded-full'>
-            {state === 'Login' ? 'Login' : 'create account'}
+
+        <button className='bg-indigo-950 w-full text-white py-2 rounded-full' type='submit'>
+            {state === 'Login' ? 'Login' : isTextDataSubmitted ?  'create account' : 'next' }
         </button>
 
-        {state === 'Login' ? <p className='mt-5 text-center'>Don't have an account ? <span onClick={()=> setState('Sign Up')}>Sign Up</span></p> : <p className='mt-5 text-center'>Already have an account ? <span onClick={()=> setState('Login')}>Login</span></p> }
+        {state === 'Login' ? <p className='mt-5 text-center'>Don't have an account ? <span className='text-indigo-500 cursor-pointer' onClick={()=> setState('Sign Up')}>Sign Up</span></p> : <p className='mt-5 text-center'>Already have an account ? <span className='text-indigo-500 cursor-pointer' onClick={()=> setState('Login')}>Login</span></p> }
 
       </form>
     </div>
